@@ -7,7 +7,6 @@ public class PowerUpInventory
 {
 
     public List<GameObject> powerUps;
-    private int storedPowerUps = 0;
     public static readonly int maxPowerUp;
 
     public PowerUpInventory()

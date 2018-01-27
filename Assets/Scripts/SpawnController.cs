@@ -10,7 +10,7 @@ public class SpawnController : MonoBehaviour {
     List<int> playersIndex;
     int head;
     public GameObject[] piecesPrefab;
-    private GameObject[] piecesBuffer;
+    public GameObject[] piecesBuffer;
 
     public SpawnController()
     {
@@ -22,7 +22,7 @@ public class SpawnController : MonoBehaviour {
     }
 
 
-    private void Start()
+    private void Awake()
     {
         piecesBuffer[0] = spawnBlock();
     }

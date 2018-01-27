@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50759400821489204}
   - component: {fileID: 114767977969068070}
   m_Layer: 0
-  m_Name: I_Boracha
+  m_Name: I_Rubber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

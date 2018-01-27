@@ -16,32 +16,42 @@ public class Block : MonoBehaviour{
     public Type type;
     public Shape shape;
     public Rigidbody2D rb;
+    private BlockController controller;
 
     void Start()
     {
         controlable = true;
-        rb = gameObject.AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
-        rb.isKinematic = true;
+        rb = GetComponent<Rigidbody2D>();
+        if(rb == null)
+            //rb = gameObject.AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
+        //rb.isKinematic = true;
         gettingDeleted = false;
+    }
+
+    public void setController(BlockController bc) {
+        controller = bc;
     }
 
     /*
         Tocar em outro bloco
      */
-    void OnCollisionEnter(Collision col)
+    void OnCollisionEnter2D(Collision2D other)
     {
+        print("Colide: " + other.gameObject.name);
         if(controlable)
         {
-            if(col.gameObject.tag == "Block" ||  col.gameObject.tag == "Ground")
+            if(other.gameObject.tag == "Block" ||  other.gameObject.tag == "Ground")
             {
                 controlable = false;
-                rb.isKinematic = false;
+                rb.gravityScale = 1;
+                if(controller != null)
+                    controller.stopHoldingBlock();
             }
         }
         else
         {
             // testa se é algum power
-            switch(col.gameObject.tag) 
+            switch(other.gameObject.tag) 
             {
                 case "power_fire":
                     if(type == Type.Wood || type == Type.Rubber)

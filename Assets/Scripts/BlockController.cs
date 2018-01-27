@@ -21,18 +21,12 @@ public class BlockController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        piecesPrefab = new GameObject[1];
-        piecesPrefab[0] = GameObject.Find("Q");
-        piecesPrefab[0].transform.position = spawnPlace.position;
-        controlledPiece = piecesPrefab[0].transform;
+        //piecesPrefab = new GameObject[1];
+        //piecesPrefab[0] = GameObject.Find("Q");
+        //piecesPrefab[0].transform.position = spawnPlace.position;
+        //controlledPiece = piecesPrefab[0].transform;
 
         //controlledPiece = spawnBlock().transform;
-        joystickString = playerString = "P" + player + "_Joy_";
-        keyboardString = playerString = "P" + player + "_";
-        if (useJoycon)
-            playerString = "P" + player + "_Joy_";
-        else
-            playerString = "P" + player + "_";
 
 	}
 	
@@ -40,18 +34,17 @@ public class BlockController : MonoBehaviour {
 	void Update () {
 		if(controlledPiece != null) {
             checkController();
-            print("Axis Hor: " + Input.GetAxisRaw(playerString + "Horizontal"));
             if (Input.GetButtonDown(playerString + "Horizontal"))
             {
-                moveBlock(Input.GetAxis(playerString + "Horizontal"));
+                moveBlock(Input.GetAxisRaw(playerString + "Horizontal"));
                 holdTimer = waitButtonHoldTime;
             }
-            else if (Mathf.Abs(Input.GetAxis(playerString + "Horizontal")) > controllerDeadZone && holdTimer <= 0)
+            else if (Mathf.Abs(Input.GetAxisRaw(playerString + "Horizontal")) > controllerDeadZone && holdTimer <= 0)
             {
                 moveBlock(Input.GetAxis(playerString + "Horizontal"));
                 holdTimer = waitButtonHoldTime;
             }
-            else if(Mathf.Abs(Input.GetAxis(playerString + "Horizontal")) <= controllerDeadZone)
+            else if(Mathf.Abs(Input.GetAxisRaw(playerString + "Horizontal")) <= controllerDeadZone)
             {
                 holdTimer = 0;
             }
@@ -66,7 +59,21 @@ public class BlockController : MonoBehaviour {
 	}
 
     public void stopHoldingBlock() {
-        controlledPiece = spawnBlock().transform;
+        spawnBlock();
+    }
+
+    public void setPlayer(int player) {
+        this.player = player;
+        joystickString = playerString = "P" + player + "_Joy_";
+        keyboardString = playerString = "P" + player + "_";
+        if (useJoycon)
+            playerString = "P" + player + "_Joy_";
+        else
+            playerString = "P" + player + "_";
+    }
+
+    public void startGame() {
+        spawnBlock();
     }
 
     private void checkController() {
@@ -106,9 +113,12 @@ public class BlockController : MonoBehaviour {
         controlledPiece.localRotation = rotation;
     }
 
-        private GameObject spawnBlock() {
-        int randomPrefab = Random.Range(0, piecesPrefab.Length - 1);
-        return GameObject.Instantiate(piecesPrefab[randomPrefab], spawnPlace.position, Quaternion.identity);
+    private void spawnBlock() {
+        GameObject spawnedBlock = GameObject.Instantiate(GameManager.instance.spawnController.getNextBlock(player-1));
+        Block blockScript = spawnedBlock.GetComponent<Block>();
+        blockScript.setController(this);
+        controlledPiece = spawnedBlock.transform;
+        spawnedBlock.transform.position = spawnPlace.position;
         //return GameObject.Instantiate(piecesPrefab[randomPrefab], spawnPlace.position, Quaternion.identity);
     }
 

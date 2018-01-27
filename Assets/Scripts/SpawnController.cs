@@ -5,29 +5,35 @@ using UnityEngine;
 /*
     o controller que gera spawn
  */
-public class SpawnController {
+public class SpawnController : MonoBehaviour {
 
-    int[] playersIndex;
+    List<int> playersIndex;
     int head;
-    GameObject[] piecesPrefab;
-    GameObject[] piecesBuffer;
+    public GameObject[] piecesPrefab;
+    private GameObject[] piecesBuffer;
 
     public SpawnController()
     {
-        playersIndex = new int[]{0,0};
-        head = 1;
+        playersIndex = new List<int>();
+        head = 0;
         piecesBuffer = new GameObject[50];
-        piecesPrefab = BlockFabric.getPrefabArray();
+        //piecesPrefab = BlockFabric.getPrefabArray();
 
-        piecesBuffer[0] = spawnBlock();
     }
 
+
+    private void Start()
+    {
+        piecesBuffer[0] = spawnBlock();
+    }
     /*
         0 para player 1
         1 para player 0
      */
     public GameObject getNextBlock(int player)
     {
+        while (player > playersIndex.Count -1)
+            playersIndex.Add(-1);
         ++playersIndex[player];
         if(playersIndex[player] == piecesBuffer.Length)
         {
@@ -51,8 +57,8 @@ public class SpawnController {
 
     private GameObject spawnBlock()
     {
-        int randomPrefab = Random.Range(0, piecesPrefab.Length - 1);
-        return GameObject.Instantiate(piecesPrefab[randomPrefab]);
+        int randomPrefab = Random.Range(0, piecesPrefab.Length-1);
+        return piecesPrefab[randomPrefab];
     }
 
     

@@ -2,11 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
-    classe responsável por armazenar todos os possíveis blocos
-
- */
-public class BlockFabric
+public class PowerUpFabric
 {
 
     public static GameObject[] prefabArray;
@@ -16,7 +12,7 @@ public class BlockFabric
         return prefabArray;
     }
 
-    public static GameObject getPrefabBlock(int index)
+    public static GameObject getPrefabPowerUp(int index)
     {
         if(index >= prefabArray.Length || index < 0)
         {

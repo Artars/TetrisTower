@@ -15,4 +15,12 @@ class BlockFabric
     {
         return getPrefabArray;
     }
+
+    /*
+        Nessa função serão inseridos os blocos a serem fabricados
+     */
+    public static initializePrefab()
+    {
+
+    }
 }

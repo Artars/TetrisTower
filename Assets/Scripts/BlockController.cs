@@ -12,9 +12,13 @@ public class BlockController : MonoBehaviour {
     public float rotationAngle = 45f;
     public int player = 1;
     private string playerString;
+    private string keyboardString;
+    private string joystickString;
 	public GameObject[] piecesPrefab;
 	private Transform controlledPiece;
-	
+    public bool useJoycon;
+    public float controllerDeadZone = 0.1f;
+
 	// Use this for initialization
 	void Start () {
         piecesPrefab = new GameObject[1];
@@ -23,23 +27,35 @@ public class BlockController : MonoBehaviour {
         controlledPiece = piecesPrefab[0].transform;
 
         //controlledPiece = spawnBlock().transform;
-        playerString = "P" + player + "_";
+        joystickString = playerString = "P" + player + "_Joy_";
+        keyboardString = playerString = "P" + player + "_";
+        if (useJoycon)
+            playerString = "P" + player + "_Joy_";
+        else
+            playerString = "P" + player + "_";
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(controlledPiece != null) {
+            checkController();
+            print("Axis Hor: " + Input.GetAxisRaw(playerString + "Horizontal"));
             if (Input.GetButtonDown(playerString + "Horizontal"))
             {
                 moveBlock(Input.GetAxis(playerString + "Horizontal"));
                 holdTimer = waitButtonHoldTime;
             }
-            else if (Input.GetButton(playerString + "Horizontal") && holdTimer <= 0)
+            else if (Mathf.Abs(Input.GetAxis(playerString + "Horizontal")) > controllerDeadZone && holdTimer <= 0)
             {
                 moveBlock(Input.GetAxis(playerString + "Horizontal"));
                 holdTimer = waitButtonHoldTime;
             }
-            else if (Input.GetButtonDown(playerString + "Rotate"))
+            else if(Mathf.Abs(Input.GetAxis(playerString + "Horizontal")) <= controllerDeadZone)
+            {
+                holdTimer = 0;
+            }
+            if (Input.GetButtonDown(playerString + "Rotate"))
             {
                 rotateBlock(Input.GetAxis(playerString + "Rotate"));
             }
@@ -51,6 +67,19 @@ public class BlockController : MonoBehaviour {
 
     public void stopHoldingBlock() {
         controlledPiece = spawnBlock().transform;
+    }
+
+    private void checkController() {
+        if(Input.GetButtonDown(keyboardString + "Horizontal"))
+        {
+            useJoycon = false;
+            playerString = keyboardString;
+        }
+        else if (Input.GetAxisRaw(joystickString + "Horizontal") != 0)
+        {
+            useJoycon = true;
+            playerString = joystickString;
+        }
     }
 
 

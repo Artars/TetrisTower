@@ -3,7 +3,7 @@ using System.Collections;
 
 
 
-class PowerUp : MonoBehaviour
+public class PowerUp : MonoBehaviour
 {
     public enum Type{Fire,Rock, Acid}
     

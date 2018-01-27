@@ -5,10 +5,9 @@ using System.Collections;
 public class PowerUpController : MonoBehaviour
 {
 
-    public GameObject[] powerUps;
+    public PowerUp activePowerUp;
 
-
-    public void newPowerUp(PowerUp)
+    void Update()
     {
 
     }

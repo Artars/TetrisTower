@@ -4,11 +4,9 @@ using System.Collections;
 
 public class PowerUpController : MonoBehaviour
 {
-
     public GameObject[] powerUps;
 
-
-    public void newPowerUp(PowerUp)
+    public void newPowerUp(PowerUp power)
     {
 
     }

@@ -18,7 +18,8 @@ public class BlockController : MonoBehaviour {
 	private Transform controlledPiece;
     public bool useJoycon;
     public float controllerDeadZone = 0.1f;
-
+    public float downSpeedUp = 2f;
+         
 	// Use this for initialization
 	void Start () {
         //piecesPrefab = new GameObject[1];
@@ -33,7 +34,10 @@ public class BlockController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(controlledPiece != null) {
+            //Look for controller
             checkController();
+
+            //Horizontal input
             if (Input.GetButtonDown(playerString + "Horizontal"))
             {
                 moveBlock(Input.GetAxisRaw(playerString + "Horizontal"));
@@ -48,11 +52,22 @@ public class BlockController : MonoBehaviour {
             {
                 holdTimer = 0;
             }
+
+            //Rotate input
             if (Input.GetButtonDown(playerString + "Rotate"))
             {
                 rotateBlock(Input.GetAxis(playerString + "Rotate"));
             }
+
+            //Down input
+            if (Input.GetAxisRaw(playerString + "Vertical") < -controllerDeadZone)
+            {
+                controlledPiece.position += new Vector3(0, -verticalSpeed * Time.deltaTime * downSpeedUp);
+            }
+            else
+            {
                 controlledPiece.position += new Vector3(0, -verticalSpeed * Time.deltaTime);
+            }
             holdTimer -= Time.deltaTime;
 		}
 		

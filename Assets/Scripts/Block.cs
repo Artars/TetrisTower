@@ -18,8 +18,8 @@ public class Block : MonoBehaviour{
     void Start()
     {
         controlable = true;
-        rb = GetComponent<Rigidbody2D>();
-        rb.isKinematic = false;
+        rb = ganeObject.addComponent(typeof(Rigidbody2D));
+        rb.isKinematic = true;
     }
 
     /*
@@ -32,7 +32,7 @@ public class Block : MonoBehaviour{
             if(col.gameObject.tag == "Block" ||  || col.gameObject.tag == "Ground")
             {
                 controlable = false;
-                rb.isKinematic = true;
+                rb.isKinematic = false;
             }
         }
         else
@@ -83,5 +83,7 @@ public class Block : MonoBehaviour{
                 }
             }
         }
+
+        Destroy(gameObject);
     }
 }

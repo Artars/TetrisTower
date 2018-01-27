@@ -17,6 +17,7 @@ public class Block : MonoBehaviour{
     public Shape shape;
     public Rigidbody2D rb;
     private BlockController controller;
+    public int player = -1;
 
     void Start()
     {
@@ -30,6 +31,7 @@ public class Block : MonoBehaviour{
 
     public void setController(BlockController bc) {
         controller = bc;
+        player = controller.player;
     }
 
     /*

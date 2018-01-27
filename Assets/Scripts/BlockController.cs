@@ -118,7 +118,10 @@ public class BlockController : MonoBehaviour {
         Block blockScript = spawnedBlock.GetComponent<Block>();
         blockScript.setController(this);
         controlledPiece = spawnedBlock.transform;
-        spawnedBlock.transform.position = spawnPlace.position;
+        if (blockScript.shape == Block.Shape.I || blockScript.shape == Block.Shape.O)
+            controlledPiece.position = spawnPlace.position + new Vector3(0.5f, 0);
+        else
+            spawnedBlock.transform.position = spawnPlace.position;
         //return GameObject.Instantiate(piecesPrefab[randomPrefab], spawnPlace.position, Quaternion.identity);
     }
 

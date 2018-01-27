@@ -22,7 +22,7 @@ public class SpawnController : MonoBehaviour {
     }
 
 
-    private void Start()
+    private void Awake()
     {
         piecesBuffer[0] = spawnBlock();
     }

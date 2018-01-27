@@ -107,8 +107,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  shape: 1
+  shape: 5
   rb: {fileID: 50571428709871466}
+  player: -1
 --- !u!212 &212215542694113656
 SpriteRenderer:
   m_ObjectHideFlags: 1

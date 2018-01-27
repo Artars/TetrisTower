@@ -10,7 +10,7 @@ public class Block : MonoBehaviour{
     public enum Type{Wood, Glass, Metal, Rubber};
     public enum Shape{I,J,L,O,S,Z,T};
 
-    private bool controlable;
+    public bool controlable;
 
     private bool gettingDeleted;
     public Type type;

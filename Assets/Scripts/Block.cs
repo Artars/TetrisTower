@@ -8,7 +8,7 @@ using System.Collections;
 public class Block : MonoBehaviour{
 
     public enum Type{Wood, Glass, Metal, Rubber};
-    public enum Shape{T,Z,_Z,I,L,_L};
+    public enum Shape{I,J,L,O,S,Z,T};
 
     private bool controlable;
 

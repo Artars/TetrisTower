@@ -8,10 +8,5 @@ public class Deadpit : MonoBehaviour {
     {
         Destroy(collision.gameObject);
     }
-
-    private void OnTriggerEnter2D(Collision2D other)
-    {
-        Destroy(other.gameObject);
-    }
-
+    
 }

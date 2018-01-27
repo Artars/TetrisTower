@@ -7,10 +7,12 @@ using System.Collections;
  */
 public class Block : MonoBehaviour{
 
-    public enum Type{Wood, Glass, Metal, Borracha};
+    public enum Type{Wood, Glass, Metal, Rubber};
     public enum Shape{T,Z,_Z,I,L,_L};
 
     private bool controlable;
+
+    private bool gettingDeleted;
     public Type type;
     public Shape shape;
     public Rigidbody2D rb;
@@ -20,6 +22,7 @@ public class Block : MonoBehaviour{
         controlable = true;
         rb = gameObject.AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         rb.isKinematic = true;
+        gettingDeleted = false;
     }
 
     /*
@@ -41,7 +44,7 @@ public class Block : MonoBehaviour{
             switch(col.gameObject.tag) 
             {
                 case "power_fire":
-                    if(type == Type.Wood || type == Type.Borracha)
+                    if(type == Type.Wood || type == Type.Rubber)
                     {
                         cascateDeletion();
                     }
@@ -53,7 +56,7 @@ public class Block : MonoBehaviour{
                     }
                     break;
                 case "power_acid":
-                    if(type == Type.Metal || type == Type.Borracha)
+                    if(type == Type.Metal || type == Type.Rubber)
                     {
                         cascateDeletion();
                     }
@@ -72,6 +75,7 @@ public class Block : MonoBehaviour{
     {
         // TODO: the animation
         Block[] blocks = Object.FindObjectsOfType(typeof(Block)) as Block[];
+        gettingDeleted = true;
 
         foreach (Block block in blocks)
         {
@@ -84,7 +88,10 @@ public class Block : MonoBehaviour{
             {
                 if(block.type == type)
                 {
-                    block.cascateDeletion();
+                    if(!block.gettingDeleted)
+                    {
+                        block.cascateDeletion();
+                    }
                 }
             }
         }

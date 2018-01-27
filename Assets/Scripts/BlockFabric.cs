@@ -9,7 +9,7 @@ using UnityEngine;
 class BlockFabric
 {
 
-    private static GameObject[] prefabArray;
+    public static GameObject[] prefabArray;
 
     public static GameObject[] getPrefabArray()
     {

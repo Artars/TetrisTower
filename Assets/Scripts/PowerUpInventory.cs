@@ -6,16 +6,15 @@ using System.Collections.Generic;
 public class PowerUpInventory
 {
 
-    public List<PowerUp> powerUps;
-    private int storedPowerUps = 0;
+    public List<GameObject> powerUps;
     public static readonly int maxPowerUp;
 
     public PowerUpInventory()
     {
-        powerUps = new List<PowerUp>(); 
+        powerUps = new List<GameObject>(); 
     }
 
-    public void pushPowerUp(PowerUp power)
+    public void pushPowerUp(GameObject power)
     {
         powerUps.Add(power);
         if(powerUps.Count > 3)
@@ -24,18 +23,18 @@ public class PowerUpInventory
         }
     }
 
-    public PowerUp popPowerUp(int index)
+    public GameObject popPowerUp(int index)
     {
         if(index > powerUps.Count || index < 0)
         {
             return null;
         }
-        PowerUp requested = powerUps[index];
+        GameObject requested = powerUps[index];
         powerUps.RemoveAt(index);
         return requested;
     }
 
-    public PowerUp GetPowerUp(int index)
+    public GameObject getPowerUp(int index)
     {
         if(index>=0 && index < powerUps.Count)
         {

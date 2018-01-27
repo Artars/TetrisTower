@@ -1,0 +1,28 @@
+Como um jogo quero criar dois jogadores lado a lado
+Como um jogo quero gerar blocos de formas e tipos aleatórios aleatórios
+Como um jogo quero acompanhar a altura do jogador
+Como um jogo quero gerar blocos de formas e tipos aleatórios quando o bloco atual cai
+Como um jogo quero dar um powerup para o jogador que atingir a altura necessária
+Como um jogo quero definir os niveis que dão powerup
+Como um jogo quero dar a vitória ao jogador que atingir o nível máximo
+
+
+Como um jogador quero controlar o bloco caindo para esquerda, direita e baixo segundo o analogico.
+Como um jogador quero rotacionar o bloco utilizando R2 e L2
+Como um jogador quero poder utilizar uma powerup quando disponível
+Como um jogador quero ganhar quando a torre chegar no final
+
+Como um bloco, ao ser criado, quero ser controlável
+Como um bloco quero cair com o tempo sem a física
+Como um bloco ao tocar outro objeto quero ter os meus controles desativados
+Como um bloco ao tocar outro objeto quero ter a fisica ligada
+Como um bloco quero desaparecer quando a minha for caida para 0
+Como um bloco quero ter minha vida diminuida quando houver um efeito negativo sobre mim
+
+Como um efeito negativo quero causar dano em um bloco
+Como um efeito negativo quero alastrar para objetos de mesmo tipo que estão em contato com o bloco que estou queimando
+Como um efeito negativo quero estar 
+
+Como fogo quero ter o efeito apenas em blocos de madeira
+Como Acido quero ter o efeito apenas em blocos de metal
+como pedra quero ter o efeito apenas em blocos de vidro

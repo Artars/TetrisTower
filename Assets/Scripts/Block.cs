@@ -7,10 +7,10 @@ using System.Collections;
  */
 public class Block : MonoBehaviour{
 
-    enum Type{Wood, Glass, Metal};
-    enum Shape{T,Z,_Z,I,L,_L};
+    public enum Type{Wood, Glass, Metal, Borracha};
+    public enum Shape{T,Z,_Z,I,L,_L};
 
-    public bool controlable;
+    private bool controlable;
     public Type type;
     public Shape shape;
     public Rigidbody2D rb;
@@ -18,7 +18,7 @@ public class Block : MonoBehaviour{
     void Start()
     {
         controlable = true;
-        rb = ganeObject.addComponent(typeof(Rigidbody2D));
+        rb = gameObject.AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         rb.isKinematic = true;
     }
 
@@ -29,7 +29,7 @@ public class Block : MonoBehaviour{
     {
         if(controlable)
         {
-            if(col.gameObject.tag == "Block" ||  || col.gameObject.tag == "Ground")
+            if(col.gameObject.tag == "Block" ||  col.gameObject.tag == "Ground")
             {
                 controlable = false;
                 rb.isKinematic = false;
@@ -41,19 +41,19 @@ public class Block : MonoBehaviour{
             switch(col.gameObject.tag) 
             {
                 case "power_fire":
-                    if(type == Wood || type == Borracha)
+                    if(type == Type.Wood || type == Type.Borracha)
                     {
                         cascateDeletion();
                     }
                     break;
                 case "power_rock": 
-                    if(type == Glass || type == Wood)
+                    if(type == Type.Glass || type == Type.Wood)
                     {
                         cascateDeletion();
                     }
                     break;
                 case "power_acid":
-                    if(type == Metal || type == Borracha)
+                    if(type == Type.Metal || type == Type.Borracha)
                     {
                         cascateDeletion();
                     }
@@ -63,19 +63,24 @@ public class Block : MonoBehaviour{
         }
     }
 
+    public bool isControlable()
+    {
+        return controlable;
+    }
+
     private void cascateDeletion()
     {
-        // do the animation
-        Block[] blocks = Object.FindObjectsOfType(Block) as Block[];
+        // TODO: the animation
+        Block[] blocks = Object.FindObjectsOfType(typeof(Block)) as Block[];
 
-        foreach (block item in blocks)
+        foreach (Block block in blocks)
         {
-            if(block == this)
+            if(block.gameObject == gameObject)
             {
                 continue;
             }
 
-            if(block.isTouching(this))
+            if(block.GetComponent<Collider2D>().IsTouching(GetComponent<Collider2D>()))
             {
                 if(block.type == type)
                 {

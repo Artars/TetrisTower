@@ -9,7 +9,6 @@ public class SpawnController {
 
     int[] playersIndex;
     int head;
-    int tail;
     GameObject[] piecesPrefab;
     GameObject[] piecesBuffer;
 
@@ -17,9 +16,8 @@ public class SpawnController {
     {
         playersIndex = new int[]{0,0};
         head = 1;
-        tail = 0;
         piecesBuffer = new GameObject[50];
-        piecesPrefab = BlockFabric::getPrefabArray();
+        piecesPrefab = BlockFabric.getPrefabArray();
 
         piecesBuffer[0] = spawnBlock();
     }
@@ -54,7 +52,7 @@ public class SpawnController {
     private GameObject spawnBlock()
     {
         int randomPrefab = Random.Range(0, piecesPrefab.Length - 1);
-        return GameObject.Instantiate(piecesPrefab[randomPrefab], spawnPlace.position, Quaternion.identity);
+        return GameObject.Instantiate(piecesPrefab[randomPrefab]);
     }
 
     

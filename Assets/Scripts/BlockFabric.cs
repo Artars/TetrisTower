@@ -13,13 +13,13 @@ class BlockFabric
 
     public static GameObject[] getPrefabArray()
     {
-        return getPrefabArray;
+        return prefabArray;
     }
 
     /*
         Nessa função serão inseridos os blocos a serem fabricados
      */
-    public static initializePrefab()
+    public static void initializePrefab()
     {
 
     }

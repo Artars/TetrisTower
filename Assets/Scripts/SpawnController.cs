@@ -13,7 +13,7 @@ public class SpawnController {
     GameObject[] piecesPrefab;
     GameObject[] piecesBuffer;
 
-    void Start()
+    public SpawnController()
     {
         playersIndex = new int[]{0,0};
         head = 1;
@@ -21,7 +21,7 @@ public class SpawnController {
         piecesBuffer = new GameObject[50];
         piecesPrefab = BlockFabric::getPrefabArray();
 
-        piecesBuffer[0] =spawnBlock();
+        piecesBuffer[0] = spawnBlock();
     }
 
     /*

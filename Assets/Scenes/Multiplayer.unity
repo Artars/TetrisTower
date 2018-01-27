@@ -311,10 +311,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5296138349be0484b9d89467c5607b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialPosition: {x: 0, y: 0, z: 0}
-  minPorcentage: 0
-  maxPorcentage: 0.6
-  verticalSpeed: 1
+  minPorcentage: 0.5
+  maxPorcentage: 1.2
+  verticalSpeed: 10
   collisionCheckBox: {x: 8, y: 1}
 --- !u!1 &1032561764
 GameObject:
@@ -402,10 +401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5296138349be0484b9d89467c5607b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialPosition: {x: 0, y: 0, z: 0}
-  minPorcentage: 0.2
+  minPorcentage: 0.5
   maxPorcentage: 1.2
-  verticalSpeed: 1
+  verticalSpeed: 10
   collisionCheckBox: {x: 8, y: 1}
 --- !u!1001 &1053878713
 Prefab:

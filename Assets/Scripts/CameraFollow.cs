@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
-    public Vector3 initialPosition;
+    private Vector3 initialPosition;
     public float minPorcentage = 0f;
     public float maxPorcentage = 0.6f;
     public float verticalSpeed = 1f;
@@ -41,8 +41,10 @@ public class CameraFollow : MonoBehaviour {
         bool detected = false;
         buffer[count] = null;
         //Verifica se há blocos ou o chão no inferior da tela
-        if (count > 0) {
-            foreach (Collider2D col in buffer) {
+        if (count > 0)
+        {
+            foreach (Collider2D col in buffer)
+            {
                 if (col == null)
                     break;
                 if (col.gameObject.tag.Equals("Block"))
@@ -65,6 +67,10 @@ public class CameraFollow : MonoBehaviour {
                     detected = true;
                 }
             }
+        }
+        else {
+            cameraSpeed = new Vector3(0, -verticalSpeed);
+            detected = true;
         }
 
         count = Physics2D.OverlapBoxNonAlloc(myTransform.position + maxOffset, collisionCheckBox, 0, buffer);
@@ -99,6 +105,7 @@ public class CameraFollow : MonoBehaviour {
 
     }
 
+    /*
     private void OnDrawGizmos()
     {
         Vector3 size = new Vector3(collisionCheckBox.x, collisionCheckBox.y, 1);
@@ -107,4 +114,5 @@ public class CameraFollow : MonoBehaviour {
         Gizmos.color = Color.blue;
         Gizmos.DrawCube(myTransform.position + minOffset, size);
     }
+    */
 }

@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject controllerPrefab;
     private List<BlockController> playerControllers;
     public SpawnController spawnController;
-
+    public GameObject nuvem;
+    
     private void Awake()
     {
         //Singleton constrution
@@ -47,8 +48,13 @@ public class GameManager : MonoBehaviour
 
     public void startGame()
     {
-        foreach (BlockController bc in playerControllers) {
+        foreach (BlockController bc in playerControllers)
+        {
             bc.startGame();
         }
+        
+        //Instancia as nuvens
+        for (int x = 0; x < 10; x++)
+            Instantiate(nuvem, new Vector3(Random.Range(-20, 100.0f), Random.Range(3, 15.0f), 0), nuvem.transform.rotation);
     }
 }

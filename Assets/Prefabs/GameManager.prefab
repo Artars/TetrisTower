@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4397103809717130}
   - component: {fileID: 114909737385121604}
   - component: {fileID: 114041225981554340}
+  - component: {fileID: 114034095028859752}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -41,6 +42,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114034095028859752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1728655434883236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4055674b60e834a93c22a22fb27987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114041225981554340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,6 +93,57 @@ MonoBehaviour:
   - {fileID: 1751164197295334, guid: f193c34a800ad4b4aa2118e08045cee5, type: 2}
   - {fileID: 1629364458157184, guid: 8129e8837ae01dd4e80c6163a6af03cc, type: 2}
   - {fileID: 1822556884319586, guid: d407d54741294194d9c5fb1328d67d84, type: 2}
+  piecesBuffer:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114909737385121604
 MonoBehaviour:
   m_ObjectHideFlags: 1

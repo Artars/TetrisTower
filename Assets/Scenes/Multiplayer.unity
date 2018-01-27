@@ -331,6 +331,12 @@ Prefab:
       propertyPath: spawnPlace.Array.data[1]
       value: 
       objectReference: {fileID: 1903220867}
+    - target: {fileID: 114909737385121604, guid: 1aa3b5a5361a25546aff20928fee1dd8,
+        type: 2}
+      propertyPath: nuvem
+      value: 
+      objectReference: {fileID: 1926042987655424, guid: c1347e769cd5c974c979f8f481e16684,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1aa3b5a5361a25546aff20928fee1dd8, type: 2}
   m_IsPrefabParent: 0

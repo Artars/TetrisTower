@@ -300,7 +300,8 @@ AudioSource:
   m_GameObject: {fileID: 1005305890781054}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243140543249616036, guid: f97adc520c08c7f4189ad4fd2972cd9f,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -390,6 +391,7 @@ MonoBehaviour:
   player: -1
   contactSound: {fileID: 8300000, guid: 19cd835213c1d9947b3cbc93d03c86bf, type: 3}
   destroySound: {fileID: 8300000, guid: 4d393e676d4ae214dad44492e9f48a4f, type: 3}
+  silenceTime: 0.5
 --- !u!212 &212524546829023280
 SpriteRenderer:
   m_ObjectHideFlags: 1

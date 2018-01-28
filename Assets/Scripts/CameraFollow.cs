@@ -59,9 +59,11 @@ public class CameraFollow : MonoBehaviour {
                 {
                     if (col == null)
                         break;
-                    if (col.gameObject.tag.Equals("Block"))
+                    Transform parent = col.transform.parent;
+
+                    if (parent != null && parent.gameObject.tag.Equals("Block"))
                     {
-                        Block blockScript = col.GetComponent<Block>();
+                        Block blockScript = parent.GetComponent<Block>();
                         if (!blockScript.controlable)
                         {
                             detected = false;
@@ -94,9 +96,10 @@ public class CameraFollow : MonoBehaviour {
                 {
                     if (col == null)
                         break;
-                    if (col.gameObject.tag.Equals("Block"))
+                    Transform parent = col.transform.parent;
+                    if (parent != null && parent.gameObject.tag.Equals("Block"))
                     {
-                        Block blockScript = col.GetComponent<Block>();
+                        Block blockScript = parent.GetComponent<Block>();
                         if (!blockScript.controlable)
                         {
                             cameraSpeed = new Vector3(0, verticalSpeed);

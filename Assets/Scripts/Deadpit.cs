@@ -6,7 +6,11 @@ public class Deadpit : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(collision.gameObject);
+        Transform parent = collision.transform.parent;
+        if (parent != null)
+            Destroy(parent.gameObject);
+        else
+            Destroy(collision.gameObject);
     }
     
 }

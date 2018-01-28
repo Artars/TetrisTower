@@ -6,7 +6,7 @@ public class Flag : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D col)
     {
-        print("Colidiu " + col.gameObject.name);
+        //print("Colidiu " + col.gameObject.name);
         if (col.gameObject.tag.Equals("Block")) {
             Block blockScript = col.GetComponent<Block>();
             if (!blockScript.controlable)

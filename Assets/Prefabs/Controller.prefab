@@ -54,10 +54,11 @@ MonoBehaviour:
   spawnPlace: {fileID: 0}
   waitButtonHoldTime: 0.5
   snapPosition: 1
-  verticalSpeed: 3
+  verticalSpeed: 4
   rotationAngle: 90
   player: 1
   piecesPrefab: []
   useJoycon: 0
   controllerDeadZone: 0.1
   downSpeedUp: 2
+  safeZoneDimension: {x: 8, y: 2}

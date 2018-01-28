@@ -19,7 +19,11 @@ public class BlockController : MonoBehaviour {
     public bool useJoycon;
     public float controllerDeadZone = 0.1f;
     public float downSpeedUp = 2f;
-         
+    public Vector2 safeZoneDimension = new Vector2(8, 4);
+    private bool tryingToSpawn = false;
+
+    private int debbugNumber = 0;
+
 	// Use this for initialization
 	void Start () {
         //piecesPrefab = new GameObject[1];
@@ -33,7 +37,8 @@ public class BlockController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(controlledPiece != null) {
+        if (controlledPiece != null)
+        {
             //Look for controller
             checkController();
 
@@ -48,7 +53,7 @@ public class BlockController : MonoBehaviour {
                 moveBlock(Input.GetAxis(playerString + "Horizontal"));
                 holdTimer = waitButtonHoldTime;
             }
-            else if(Mathf.Abs(Input.GetAxisRaw(playerString + "Horizontal")) <= controllerDeadZone)
+            else if (Mathf.Abs(Input.GetAxisRaw(playerString + "Horizontal")) <= controllerDeadZone)
             {
                 holdTimer = 0;
             }
@@ -69,12 +74,20 @@ public class BlockController : MonoBehaviour {
                 controlledPiece.position += new Vector3(0, -verticalSpeed * Time.deltaTime);
             }
             holdTimer -= Time.deltaTime;
-		}
+        }
+        else if (tryingToSpawn) {
+            bool result = checkForSafeZone();
+            if (result) {
+                tryingToSpawn = false;
+                spawnBlock();
+            }
+        }
 		
 	}
 
     public void stopHoldingBlock() {
-        spawnBlock();
+        tryingToSpawn = true;
+        controlledPiece = null;
     }
 
     public void setPlayer(int player) {
@@ -129,15 +142,38 @@ public class BlockController : MonoBehaviour {
     }
 
     private void spawnBlock() {
-        GameObject spawnedBlock = GameManager.instance.spawnController.getNextBlock(player-1, spawnPlace.position, Quaternion.identity);
+        GameObject spawnedBlock = GameObject.Instantiate(GameManager.instance.spawnController.getNextBlock(player-1));
         Block blockScript = spawnedBlock.GetComponent<Block>();
         blockScript.setController(this);
         controlledPiece = spawnedBlock.transform;
+        spawnedBlock.name = "Player " + player + "Number: " + debbugNumber;
+        debbugNumber++;
         if (blockScript.shape == Block.Shape.I || blockScript.shape == Block.Shape.O)
             controlledPiece.position = spawnPlace.position;
         else
             controlledPiece.position = spawnPlace.position + new Vector3(0.5f, 0.5f);
         //return GameObject.Instantiate(piecesPrefab[randomPrefab], spawnPlace.position, Quaternion.identity);
+    }
+
+    private bool checkForSafeZone()
+    {
+        Collider2D[] hits;
+        hits = Physics2D.OverlapBoxAll(spawnPlace.position, safeZoneDimension, 0);
+        bool hasFound = false;
+
+        if (hits.Length > 0) {
+            foreach (Collider2D hit in hits) {
+                if (hit == null)
+                    break;
+                Transform parent = hit.transform.parent;
+                if (parent != null && parent.gameObject.tag.Equals("Block")) {
+                    hasFound = true;
+                    break;
+                }
+            }
+        }
+
+        return !hasFound;
     }
 
 }

@@ -15,7 +15,7 @@ public class Block : MonoBehaviour{
     [HideInInspector]
     public bool controlable;
 
-    private bool gettingDeleted;
+    private bool gettingDeleted = false;
     public Type type;
     public Shape shape;
     public Rigidbody2D rb;
@@ -28,12 +28,13 @@ public class Block : MonoBehaviour{
     private AudioSource audioSource; 
     private float deletionTimer = 0f;
     private static readonly float deletionDuration = 1f;
-    private static float killY = -15f;
+    private float killY = -15f;
     private Transform myTransform;
     private static float standardVelocitySound = 2f;
     private float silenceTimer;
 
-    void Start()
+
+    void Awake()
     {
         myTransform = transform;
         controlable = true;
@@ -47,6 +48,7 @@ public class Block : MonoBehaviour{
 
     void Update()
     {
+        
         if(deleting)
         {
             deletionTimer += Time.deltaTime;
@@ -55,13 +57,14 @@ public class Block : MonoBehaviour{
                 Destroy(gameObject);
             }
         }
-
         
+        /*
         if (myTransform.position.y < killY) {
             if (controller != null)
                 controller.stopHoldingBlock();
             Destroy(gameObject);
         }
+        */
         silenceTimer -= Time.deltaTime;
     }
 
@@ -76,7 +79,7 @@ public class Block : MonoBehaviour{
     void OnCollisionEnter2D(Collision2D other)
     {
         collideSound(other.gameObject);
-        //print("Colide: " + other.gameObject.name);
+        print(gameObject.name + " colide com " + other.gameObject.name);
         if(controlable)
         {
             if(other.gameObject.tag == "Block" ||  other.gameObject.tag == "Ground")
@@ -190,5 +193,13 @@ public class Block : MonoBehaviour{
 
         audioSource.volume = 1;
         audioSource.Play();
+    }
+
+    private void OnDestroy()
+    {
+        if (controlable) {
+            if (controller != null)
+                controller.stopHoldingBlock();
+        }
     }
 }

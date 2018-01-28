@@ -7,10 +7,16 @@ using System.Collections;
  */
 public class Block : MonoBehaviour{
 
-    public enum Type{Wood, Glass, Metal, Rubber};
+    public enum Type{Wood, Glass, Metal, Rock};
     public enum Shape{I,J,L,O,S,Z,T};
 
+<<<<<<< Updated upstream
     public bool controlable;
+=======
+    private bool deleting = false;
+
+    private bool controlable;
+>>>>>>> Stashed changes
 
     private bool gettingDeleted;
     public Type type;
@@ -19,6 +25,8 @@ public class Block : MonoBehaviour{
     private BlockController controller;
     public int player = -1;
 
+    private float deletionTimer = 0f;
+    private static readonly float deletionDuration = 1f;
     void Start()
     {
         controlable = true;
@@ -27,6 +35,18 @@ public class Block : MonoBehaviour{
             //rb = gameObject.AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         //rb.isKinematic = true;
         gettingDeleted = false;
+    }
+
+    void Update()
+    {
+        if(deleting)
+        {
+            deletionTimer += Time.deltaTime;
+            if(deletionTimer > deletionDuration )
+            {
+                Destroy(gameObject)
+            }
+        }
     }
 
     public void setController(BlockController bc) {
@@ -56,21 +76,21 @@ public class Block : MonoBehaviour{
             switch(other.gameObject.tag) 
             {
                 case "power_fire":
-                    if(type == Type.Wood || type == Type.Rubber)
+                    if(type == Type.Wood)
                     {
-                        cascateDeletion();
+                        cascateDeletion(PowerUp.Type.Fire);
                     }
                     break;
                 case "power_rock": 
                     if(type == Type.Glass || type == Type.Wood)
                     {
-                        cascateDeletion();
+                        cascateDeletion(PowerUp.Type.Rock);
                     }
                     break;
                 case "power_acid":
-                    if(type == Type.Metal || type == Type.Rubber)
+                    if(type == Type.Metal)
                     {
-                        cascateDeletion();
+                        cascateDeletion(PowerUp.Type.Acid);
                     }
                     break;
 
@@ -83,7 +103,7 @@ public class Block : MonoBehaviour{
         return controlable;
     }
 
-    private void cascateDeletion()
+    private void cascateDeletion(PowerUp.Type damageType)
     {
         // TODO: the animation
         Block[] blocks = Object.FindObjectsOfType(typeof(Block)) as Block[];
@@ -102,12 +122,12 @@ public class Block : MonoBehaviour{
                 {
                     if(!block.gettingDeleted)
                     {
-                        block.cascateDeletion();
+
+                        deleting = true;
+                        block.cascateDeletion(damageType);
                     }
                 }
             }
         }
-
-        Destroy(gameObject);
     }
 }

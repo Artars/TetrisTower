@@ -43,12 +43,12 @@ public class PowerUpController : MonoBehaviour
                     movePower(Input.GetAxisRaw(playerString + "Horizontal"));
                     holdTimer = waitButtonHoldTime/16;
                 }
-                else if (Mathf.Abs(Input.GetAxisRaw(playerString + "_joy_Horizontal")) > controllerDeadZone && holdTimer <= 0)
+                else if (Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Horizontal")) > controllerDeadZone && holdTimer <= 0)
                 {
-                    movePower(Input.GetAxis(playerString + "_joy_Horizontal"));
+                    movePower(Input.GetAxis(playerString + "_Joy_Horizontal"));
                     holdTimer = waitButtonHoldTime/16;
                 }
-                else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_joy_Horizontal")) <= controllerDeadZone)
+                else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Horizontal")) <= controllerDeadZone)
                 {
                     holdTimer = 0;
                 }
@@ -71,24 +71,24 @@ public class PowerUpController : MonoBehaviour
         else
         {
             //seleção
-            if(Input.GetButtonDown(playerString + "item1"))
+            if(Input.GetButtonDown(playerString + "Item1"))
             {
                 powerSelection = 0;
             }
-            else if(Input.GetButtonDown(playerString + "item2"))
+            else if(Input.GetButtonDown(playerString + "Item2"))
             {
                 powerSelection = 1;
             }
-            else if(Input.GetButtonDown(playerString + "item3"))
+            else if(Input.GetButtonDown(playerString + "Item3"))
             {
                 powerSelection = 2;
             }
-            else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_joy_item")) > controllerDeadZone && holdTimer <= 0 )
+            else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Item")) > controllerDeadZone && holdTimer <= 0 )
             {
-                scrollPower(Input.GetAxis(playerString + "_joy_item"));
+                scrollPower(Input.GetAxis(playerString + "_Joy_Item"));
                 holdTimer = waitButtonHoldTime;
             }
-            else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_joy_item")) <= controllerDeadZone)
+            else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Item")) <= controllerDeadZone)
             {
                 holdTimer = 0;
             }
@@ -140,20 +140,6 @@ public class PowerUpController : MonoBehaviour
         storedPowerUps.pushPowerUp(Instantiate(powerUpPrefabs[power]));
     }
 
-    /* 
-    private void checkController() {
-        if(Input.GetButtonDown(keyboardString + "Horizontal"))
-        {
-            useJoycon = false;
-            playerString = keyboardString;
-        }
-        else if (Input.GetAxisRaw(joystickString + "Horizontal") != 0)
-        {
-            useJoycon = true;
-            playerString = joystickString;
-        }
-    }
-    */
     /// <summary>
     /// Move bloco de acordo com o grid
     /// </summary>
@@ -161,11 +147,7 @@ public class PowerUpController : MonoBehaviour
 	private void movePower(float axis) {
         int clamped = (axis > 0) ? 1 : -1;
         
-        if(activePowerUp.position.x > rightContraint && clamped > 0)
-        {
-            return;
-        }
-        if(activePowerUp.position.x < leftContraint && clamped < 0 )
+        if(activePowerUp.position.x > rightContraint && clamped > 0 || activePowerUp.position.x < leftContraint && clamped < 0)
         {
             return;
         }

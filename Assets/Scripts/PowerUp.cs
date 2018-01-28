@@ -5,9 +5,9 @@ using System.Collections;
 
 public class PowerUp : MonoBehaviour
 {
-    public enum Type{Fire,Rock, Acid}
+    public enum Type{Fire,Rock, Acid, Antenna}
     
-    private Type type;
+    public Type type;
 
     
     private Rigidbody2D rigid;
@@ -34,18 +34,6 @@ public class PowerUp : MonoBehaviour
     void setType(Type nextType)
     {
         type = nextType;
-        switch(type)
-        {
-            case Type.Fire:
-                gameObject.tag = "Power_Fire";
-                break;
-            case Type.Rock:
-                gameObject.tag = "Power_Rock";
-                break;
-            case Type.Acid:
-                gameObject.tag = "Power_acid";
-                break;
-        }
     }
 
     public Type getType()
@@ -83,6 +71,5 @@ public class PowerUp : MonoBehaviour
             }
         }
     }
-
 
 }

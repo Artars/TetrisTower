@@ -79,7 +79,7 @@ public class Block : MonoBehaviour{
     void OnCollisionEnter2D(Collision2D other)
     {
         collideSound(other.gameObject);
-        print(gameObject.name + " colide com " + other.gameObject.name);
+        //print(gameObject.name + " colide com " + other.gameObject.name);
         if(controlable)
         {
             if(other.gameObject.tag == "Block" ||  other.gameObject.tag == "Ground")
@@ -92,10 +92,12 @@ public class Block : MonoBehaviour{
         }
         else
         {
-            // testa se é algum power
-            switch(other.gameObject.tag) 
+            /*
+            if(other.gameObject.tag == "Projectile")
             {
-                case "power_fire":
+                PowerUp pup = other.gameObject.GetComponent<PowerUp>();
+
+                Type powerType =
                     if(type == Type.Wood)
                     {
                         cascateDeletion(PowerUp.Type.Fire);
@@ -114,7 +116,7 @@ public class Block : MonoBehaviour{
                     }
                     break;
 
-            }
+            }*/
         }
     }
 
@@ -201,5 +203,11 @@ public class Block : MonoBehaviour{
             if (controller != null)
                 controller.stopHoldingBlock();
         }
+    }
+
+    public BlockController getController() {
+        if (controlable && controller != null)
+            return controller;
+        else return null;
     }
 }

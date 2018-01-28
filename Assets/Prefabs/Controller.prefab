@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4793235098535782}
   - component: {fileID: 114650778436197088}
+  - component: {fileID: 114904074631463232}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -62,3 +63,25 @@ MonoBehaviour:
   controllerDeadZone: 0.1
   downSpeedUp: 2
   safeZoneDimension: {x: 8, y: 2}
+  moveSpeed: 10
+  cursorPrefab: {fileID: 1932370177698722, guid: 224371b8b92903d4b868fe2226b15732,
+    type: 2}
+  timeToShoot: 5
+  projectileSpeed: 10
+  popUpPrefab: {fileID: 1888945904101430, guid: feab6395f2f99ad45b10be29fbc0b648,
+    type: 2}
+--- !u!114 &114904074631463232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1297374455127710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767a3850fa0875a46a7efa15f7b3792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpsPrefabs:
+  - {fileID: 1802081644307504, guid: 138e79ecb18e45341bd4f4292ed017ab, type: 2}
+  - {fileID: 0}
+  - {fileID: 1557402798485748, guid: f3bb100d6e6c2ab4d8323286595d4275, type: 2}

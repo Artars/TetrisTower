@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4853502658847364}
   - component: {fileID: 198452337390299600}
   - component: {fileID: 199633793166317566}
+  - component: {fileID: 114368614438628854}
   m_Layer: 0
   m_Name: AcidBall
   m_TagString: Untagged
@@ -72,6 +73,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 2.7700002, z: 0}
+--- !u!114 &114368614438628854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1557402798485748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e81dd0ea1113b742af2f493dd4c97d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  angle: 45
 --- !u!198 &198452337390299600
 ParticleSystem:
   m_ObjectHideFlags: 1

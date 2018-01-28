@@ -129,14 +129,12 @@ public class BlockController : MonoBehaviour {
     }
 
     private void spawnBlock() {
-        GameObject spawnedBlock = GameObject.Instantiate(GameManager.instance.spawnController.getNextBlock(player-1));
+        GameObject spawnedBlock = GameManager.instance.spawnController.getNextBlock(player-1, spawnPlace.position, Quaternion.identity);
         Block blockScript = spawnedBlock.GetComponent<Block>();
         blockScript.setController(this);
         controlledPiece = spawnedBlock.transform;
         if (blockScript.shape == Block.Shape.I || blockScript.shape == Block.Shape.O)
-            controlledPiece.position = spawnPlace.position + new Vector3(0.5f, 0);
-        else
-            spawnedBlock.transform.position = spawnPlace.position;
+            controlledPiece.position += new Vector3(0.5f, 0);
         //return GameObject.Instantiate(piecesPrefab[randomPrefab], spawnPlace.position, Quaternion.identity);
     }
 

@@ -9,19 +9,18 @@ public class SpawnController : MonoBehaviour {
 
     List<int> playersIndex;
     public GameObject[] piecesPrefab;
-    public List<GameObject> piecesBuffer;
+    private List<GameObject> piecesBuffer;
 
     public SpawnController()
     {
         playersIndex = new List<int>();
         piecesBuffer = new List<GameObject>();
-        //piecesPrefab = BlockFabric.getPrefabArray();
     }
 
 
     private void Awake()
     {
-        piecesBuffer.Add(spawnBlock());
+        //piecesBuffer.Add(spawnBlock());
     }
     /*
         0 para player 1
@@ -31,6 +30,12 @@ public class SpawnController : MonoBehaviour {
     {
         while (player > playersIndex.Count -1)
             playersIndex.Add(0);
+            
+        while(playersIndex[player] >= piecesBuffer.Count )
+        {
+            piecesBuffer.Add(spawnBlock());
+        }
+
         
         GameObject returnObject = GameObject.Instantiate(piecesBuffer[ playersIndex[player] ], position, quart);
         ++playersIndex[player];
@@ -40,10 +45,6 @@ public class SpawnController : MonoBehaviour {
             popTail();
         }
 
-        if(playersIndex[player] == piecesBuffer.Count)
-        {
-            piecesBuffer.Add(spawnBlock());
-        }
         return returnObject;
     }
 

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Transform[] spawnPlace;
     public GameObject controllerPrefab;
     private List<BlockController> playerControllers;
+    public CameraFollow[] cameras;
     public SpawnController spawnController;
     public GameObject nuvem;
     
@@ -43,6 +44,10 @@ public class GameManager : MonoBehaviour
             controller.setPlayer(i + 1);
             playerControllers.Add(controller);
             controller.spawnPlace = spawnPlace[i];
+        }
+        for (int i = 0; i < cameras.Length; i++) {
+            CameraFollow camScript = cameras[i].GetComponent<CameraFollow>();
+            camScript.setPlayer(i + 1, spawnPlace.Length);
         }
     }
 

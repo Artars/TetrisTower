@@ -37,69 +37,87 @@ public class PowerUpController : MonoBehaviour
         {
             if(aiming)
             {
-
-                if (Input.GetButtonDown(playerString + "Horizontal"))
-                {
-                    movePower(Input.GetAxisRaw(playerString + "Horizontal"));
-                    holdTimer = waitButtonHoldTime/16;
-                }
-                else if (Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Horizontal")) > controllerDeadZone && holdTimer <= 0)
-                {
-                    movePower(Input.GetAxis(playerString + "_Joy_Horizontal"));
-                    holdTimer = waitButtonHoldTime/16;
-                }
-                else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Horizontal")) <= controllerDeadZone)
-                {
-                    holdTimer = 0;
-                }
-
-
-                //teste de tiro
-                if(Input.GetButtonDown(playerString + "Fire"))
-                {
-                    aiming = false;
-                }
+                checkHorizontalMove();
+                checkFire();
             }
             else
             {
-                if(!GetComponent<PowerUp>().isTouching())
-                {
-                    activePowerUp.position += new Vector3(0, -verticalSpeed * Time.deltaTime);
-                }
+                keepProjetilePath();
             }
         }
         else
         {
-            //seleção
-            if(Input.GetButtonDown(playerString + "Item1"))
-            {
-                powerSelection = 0;
-            }
-            else if(Input.GetButtonDown(playerString + "Item2"))
-            {
-                powerSelection = 1;
-            }
-            else if(Input.GetButtonDown(playerString + "Item3"))
-            {
-                powerSelection = 2;
-            }
-            else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Item")) > controllerDeadZone && holdTimer <= 0 )
-            {
-                scrollPower(Input.GetAxis(playerString + "_Joy_Item"));
-                holdTimer = waitButtonHoldTime;
-            }
-            else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Item")) <= controllerDeadZone)
-            {
-                holdTimer = 0;
-            }
-
-            //selecionar
-            if(Input.GetButtonDown(playerString + "Activate")) 
-            {
-                activateSelection();
-            } 
+            checkItemSelection();
+            checkPowerUpActivation();
         }
         holdTimer -= Time.deltaTime;
+    }
+
+    void checkHorizontalMove()
+    {
+        if (Input.GetButtonDown(playerString + "Horizontal"))
+        {
+            movePower(Input.GetAxisRaw(playerString + "Horizontal"));
+            holdTimer = waitButtonHoldTime/16;
+        }
+        else if (Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Horizontal")) > controllerDeadZone && holdTimer <= 0)
+        {
+            movePower(Input.GetAxis(playerString + "_Joy_Horizontal"));
+            holdTimer = waitButtonHoldTime/16;
+        }
+        else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Horizontal")) <= controllerDeadZone)
+        {
+            holdTimer = 0;
+        }
+    }
+
+    void checkFire()
+    {
+        if(Input.GetButtonDown(playerString + "Fire"))
+        {
+            aiming = false;
+        }
+    }
+
+    checkItemSelection()
+    {
+        if(Input.GetButtonDown(playerString + "Item1"))
+        {
+            powerSelection = 0;
+        }
+        else if(Input.GetButtonDown(playerString + "Item2"))
+        {
+            powerSelection = 1;
+        }
+        else if(Input.GetButtonDown(playerString + "Item3"))
+        {
+            powerSelection = 2;
+        }
+        else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Item")) > controllerDeadZone && holdTimer <= 0 )
+        {
+            scrollPower(Input.GetAxis(playerString + "_Joy_Item"));
+            holdTimer = waitButtonHoldTime;
+        }
+        else if(Mathf.Abs(Input.GetAxisRaw(playerString + "_Joy_Item")) <= controllerDeadZone)
+        {
+            holdTimer = 0;
+        }
+    }
+
+    void checkPowerUpActivation()
+    {
+        if(Input.GetButtonDown(playerString + "Activate")) 
+        {
+            activateSelection();
+        } 
+    }
+
+    void keepProjetilePath()
+    {
+        if(!GetComponent<PowerUp>().isTouching())
+        {
+            activePowerUp.position += new Vector3(0, -verticalSpeed * Time.deltaTime);
+        }
     }
 
     void scrollPower(float direction)
@@ -126,6 +144,7 @@ public class PowerUpController : MonoBehaviour
     void activateSelection()
     {
         activePowerUp = storedPowerUps.popPowerUp(powerSelection).transform;
+
         if(activePowerUp != null)
         {
             powerSelection = 0;

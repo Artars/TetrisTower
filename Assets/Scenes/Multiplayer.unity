@@ -1883,6 +1883,49 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &1858500606 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1450869755473510, guid: 88b5169175c28324e90499051ec53202,
+    type: 2}
+  m_PrefabInternal: {fileID: 685141043}
+--- !u!114 &1858500608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1858500606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341f1eae53fc4eb4db6c05daac2d4ca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireBall: {fileID: 1802081644307504, guid: 138e79ecb18e45341bd4f4292ed017ab, type: 2}
+  fireBall2: {fileID: 1683288071677672, guid: 8af37ec9af3b28e48997d0ed55313f47, type: 2}
+--- !u!61 &1858500609
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1858500606}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.17516708, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 1.125, y: 0.40625, z: 1.125, w: 0.40625}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 1}
+    newSize: {x: 35, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 2
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 33.54502, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1903220866
 GameObject:
   m_ObjectHideFlags: 0

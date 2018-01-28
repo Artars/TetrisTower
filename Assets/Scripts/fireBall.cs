@@ -19,6 +19,24 @@ public class fireBall : MonoBehaviour {
         mfa.angle = angle;
     }
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        print("colision");
+        if (col.gameObject.tag == "Block")
+        {
+            DestroyObject(col.gameObject);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        print("colision");
+        if (other.gameObject.tag == "Block")
+        {
+            DestroyObject(other.gameObject);
+        }
+    }
+
     public static explicit operator fireBall(GameObject v)
     {
         throw new NotImplementedException();

@@ -27,16 +27,22 @@ public class SpawnController : MonoBehaviour {
         0 para player 1
         1 para player 0
      */
-    public GameObject getNextBlock(int player)
+    public GameObject getNextBlock(int player, Vector3 position, Quaternion quart)
     {
         while (player > playersIndex.Count -1)
             playersIndex.Add(0);
         
-        GameObject returnObject = piecesBuffer[ playersIndex[player] ];
+        GameObject returnObject = GameObject.Instantiate(piecesBuffer[ playersIndex[player] ], position, quart);
         ++playersIndex[player];
+    
         if(testTailPop())
         {
             popTail();
+        }
+
+        if(playersIndex[player] == piecesBuffer.Count)
+        {
+            piecesBuffer.Add(spawnBlock());
         }
         return returnObject;
     }

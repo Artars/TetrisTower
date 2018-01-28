@@ -53,9 +53,9 @@ public class PowerUp : MonoBehaviour
         return type;
     }
 
-    void onCollisionEnter2D(Collision2D col)
+    void onTriggerEnter2D(Collider col)
     {
-        Block block = col.collider.gameObject.GetComponent<Block>();
+        Block block = col.gameObject.GetComponent<Block>();
 
         if(block != null)
         {
@@ -64,20 +64,23 @@ public class PowerUp : MonoBehaviour
                 timeElapsed = 0;
                 touching = true;
             }
-            else
-            {
-                Physics.IgnoreCollision(block.GetComponent<Collider>(), GetComponent<Collider>());
-            }
         }
     }
 
-    void onCollisionStay2D(Collision2D col)
+    void onTriggerStay2D(Collider2D col)
     {
-        
-        timeElapsed += Time.deltaTime;
-        if(timeElapsed > timeBeforeDestroy)
+        Block block = col.gameObject.GetComponent<Block>();
+
+        if(block != null)
         {
-            Destroy(gameObject);
+            if(!block.isControlable())
+            {
+                timeElapsed += Time.deltaTime;
+                if(timeElapsed > timeBeforeDestroy)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 

@@ -1458,12 +1458,6 @@ Prefab:
       value: 
       objectReference: {fileID: 1926042987655424, guid: c1347e769cd5c974c979f8f481e16684,
         type: 2}
-    - target: {fileID: 114909737385121604, guid: 1aa3b5a5361a25546aff20928fee1dd8,
-        type: 2}
-      propertyPath: popUpCameraPreafab
-      value: 
-      objectReference: {fileID: 1888945904101430, guid: feab6395f2f99ad45b10be29fbc0b648,
-        type: 2}
     - target: {fileID: 114041225981554340, guid: 1aa3b5a5361a25546aff20928fee1dd8,
         type: 2}
       propertyPath: piecesPrefab.Array.data[0]
@@ -1632,6 +1626,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1606223397016764, guid: 176719481799ca34fbd6602f1a18a0e1,
         type: 2}
+    - target: {fileID: 114909737385121604, guid: 1aa3b5a5361a25546aff20928fee1dd8,
+        type: 2}
+      propertyPath: popUpCameraPreafab
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114034095028859752, guid: 1aa3b5a5361a25546aff20928fee1dd8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1aa3b5a5361a25546aff20928fee1dd8, type: 2}

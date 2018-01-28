@@ -11,6 +11,8 @@ public class SpawnController : MonoBehaviour {
     public GameObject[] piecesPrefab;
     private List<GameObject> piecesBuffer;
 
+    private bool firstTime = true;
+
     public SpawnController()
     {
         playersIndex = new List<int>();
@@ -20,13 +22,13 @@ public class SpawnController : MonoBehaviour {
 
     private void Awake()
     {
-        //piecesBuffer.Add(spawnBlock());
+//        piecesBuffer.Add(spawnBlock());
     }
     /*
         0 para player 1
         1 para player 0
      */
-    public GameObject getNextBlock(int player, Vector3 position, Quaternion quart)
+    public GameObject getNextBlock(int player)
     {
         while (player > playersIndex.Count -1)
             playersIndex.Add(0);
@@ -37,14 +39,15 @@ public class SpawnController : MonoBehaviour {
         }
 
         
-        GameObject returnObject = GameObject.Instantiate(piecesBuffer[ playersIndex[player] ], position, quart);
+        GameObject returnObject = piecesBuffer[ playersIndex[player] ];
         ++playersIndex[player];
     
-        if(testTailPop())
+        if(!firstTime && testTailPop())
         {
             popTail();
         }
 
+        firstTime = false;
         return returnObject;
     }
 

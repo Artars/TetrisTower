@@ -37,8 +37,8 @@ public class PowerUpController : MonoBehaviour
         {
             if(aiming)
             {
-                checkHorizontalMove();
-                checkFire();
+                checkAimMove();
+                checkFirePressed();
             }
             else
             {
@@ -53,7 +53,7 @@ public class PowerUpController : MonoBehaviour
         holdTimer -= Time.deltaTime;
     }
 
-    void checkHorizontalMove()
+    void checkAimMove()
     {
         if (Input.GetButtonDown(playerString + "Horizontal"))
         {
@@ -71,7 +71,7 @@ public class PowerUpController : MonoBehaviour
         }
     }
 
-    void checkFire()
+    void checkFirePressed()
     {
         if(Input.GetButtonDown(playerString + "Fire"))
         {

@@ -55,7 +55,7 @@ public class Block : MonoBehaviour{
      */
     void OnCollisionEnter2D(Collision2D other)
     {
-        print("Colide: " + other.gameObject.name);
+        //print("Colide: " + other.gameObject.name);
         if(controlable)
         {
             if(other.gameObject.tag == "Block" ||  other.gameObject.tag == "Ground")

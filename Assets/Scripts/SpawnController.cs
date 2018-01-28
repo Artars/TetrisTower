@@ -8,23 +8,20 @@ using UnityEngine;
 public class SpawnController : MonoBehaviour {
 
     List<int> playersIndex;
-    int head;
     public GameObject[] piecesPrefab;
-    public GameObject[] piecesBuffer;
+    public List<GameObject> piecesBuffer;
 
     public SpawnController()
     {
         playersIndex = new List<int>();
-        head = 0;
-        piecesBuffer = new GameObject[50];
+        piecesBuffer = new List<GameObject>();
         //piecesPrefab = BlockFabric.getPrefabArray();
-
     }
 
 
     private void Awake()
     {
-        piecesBuffer[0] = spawnBlock();
+        piecesBuffer.Add(spawnBlock());
     }
     /*
         0 para player 1
@@ -33,29 +30,40 @@ public class SpawnController : MonoBehaviour {
     public GameObject getNextBlock(int player)
     {
         while (player > playersIndex.Count -1)
-            playersIndex.Add(-1);
+            playersIndex.Add(0);
+        
+        GameObject returnObject = piecesBuffer[ playersIndex[player] ];
         ++playersIndex[player];
-        if(playersIndex[player] == piecesBuffer.Length)
+        if(testTailPop())
         {
-            playersIndex[player] = 0;
+            popTail();
         }
-        //armazena mais no buffer
-        if(playersIndex[player] == head)
-        {
-            ++head;
-            if(head == piecesBuffer.Length)
-            {
-                head = 0;
-            }
-            piecesBuffer[head] = spawnBlock();
-        }
-
-        return piecesBuffer[playersIndex[player]];
+        return returnObject;
     }
 
+    bool testTailPop()
+    {
+        foreach(int index in playersIndex)
+        {
+            if( index == 0 )
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    void popTail()
+    {
+        for(int i = 0 ; i < playersIndex.Count ; i++)
+        {
+            --playersIndex[i];
+        }
 
-    private GameObject spawnBlock()
+        piecesBuffer.RemoveAt(0);
+    }
+
+    GameObject spawnBlock()
     {
         int randomPrefab = Random.Range(0, piecesPrefab.Length-1);
         return piecesPrefab[randomPrefab];

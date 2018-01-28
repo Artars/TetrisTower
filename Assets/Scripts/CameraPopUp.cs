@@ -55,8 +55,7 @@ public class CameraPopUp : MonoBehaviour {
         else {
             rectToPlace = new Rect((player-1) * 0.75f * ratio, 0.7f, ratio * 0.5f, 0.2f);
         }
-        print("Rect: " + rectToPlace);
+        
         myCamera.rect = rectToPlace;
-        print("Camera Rect: " + myCamera.rect);
     }
 }

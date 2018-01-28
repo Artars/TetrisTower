@@ -10,13 +10,9 @@ public class Block : MonoBehaviour{
     public enum Type{Wood, Glass, Metal, Rock};
     public enum Shape{I,J,L,O,S,Z,T};
 
-<<<<<<< Updated upstream
-    public bool controlable;
-=======
     private bool deleting = false;
 
-    private bool controlable;
->>>>>>> Stashed changes
+    public bool controlable;
 
     private bool gettingDeleted;
     public Type type;
@@ -44,7 +40,7 @@ public class Block : MonoBehaviour{
             deletionTimer += Time.deltaTime;
             if(deletionTimer > deletionDuration )
             {
-                Destroy(gameObject)
+                Destroy(gameObject);
             }
         }
     }

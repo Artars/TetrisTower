@@ -17,7 +17,7 @@ public class Nuvem : MonoBehaviour
         transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
         if (transform.position.x < -25)
         {
-            transform.position = new Vector3(25, 3.135882f, 0);
+            transform.position = new Vector3(25, transform.position.y, 0);
         }
     }
 }

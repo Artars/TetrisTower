@@ -12,6 +12,7 @@ public class Block : MonoBehaviour{
 
     private bool deleting = false;
 
+    [HideInInspector]
     public bool controlable;
 
     private bool gettingDeleted;

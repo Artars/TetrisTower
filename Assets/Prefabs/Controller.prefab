@@ -60,3 +60,4 @@ MonoBehaviour:
   piecesPrefab: []
   useJoycon: 0
   controllerDeadZone: 0.1
+  downSpeedUp: 2

@@ -134,7 +134,9 @@ public class BlockController : MonoBehaviour {
         blockScript.setController(this);
         controlledPiece = spawnedBlock.transform;
         if (blockScript.shape == Block.Shape.I || blockScript.shape == Block.Shape.O)
-            controlledPiece.position += new Vector3(0.5f, 0);
+            controlledPiece.position = spawnPlace.position;
+        else
+            controlledPiece.position = spawnPlace.position + new Vector3(0.5f, 0.5f);
         //return GameObject.Instantiate(piecesPrefab[randomPrefab], spawnPlace.position, Quaternion.identity);
     }
 

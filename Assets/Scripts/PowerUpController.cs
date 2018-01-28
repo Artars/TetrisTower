@@ -78,7 +78,7 @@ public class PowerUpController : MonoBehaviour
             aiming = false;
         }
     }
-
+    
     void checkItemSelection()
     {
         if(Input.GetButtonDown(playerString + "Item1"))

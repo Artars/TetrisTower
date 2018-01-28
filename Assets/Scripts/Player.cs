@@ -11,7 +11,12 @@ public class Player : MonoBehaviour
     public PowerUpController powerUpCtr;
 
     public float maxLeft;
-    public float maxRight; 
+    public float maxRight;
+
+    public float getCenter()
+    {
+        return (maxLeft+maxRight)/2;
+    } 
 
 
 }

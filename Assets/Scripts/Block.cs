@@ -21,17 +21,28 @@ public class Block : MonoBehaviour{
     public Rigidbody2D rb;
     private BlockController controller;
     public int player = -1;
+    public AudioClip contactSound;
+    public AudioClip destroySound;
+    public float silenceTime = 0.5f;
 
+    private AudioSource audioSource; 
     private float deletionTimer = 0f;
     private static readonly float deletionDuration = 1f;
+    private static float killY = -15f;
+    private Transform myTransform;
+    private static float standardVelocitySound = 2f;
+    private float silenceTimer;
+
     void Start()
     {
+        myTransform = transform;
         controlable = true;
         rb = GetComponent<Rigidbody2D>();
         if(rb == null)
             //rb = gameObject.AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         //rb.isKinematic = true;
         gettingDeleted = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -44,6 +55,14 @@ public class Block : MonoBehaviour{
                 Destroy(gameObject);
             }
         }
+
+        
+        if (myTransform.position.y < killY) {
+            if (controller != null)
+                controller.stopHoldingBlock();
+            Destroy(gameObject);
+        }
+        silenceTimer -= Time.deltaTime;
     }
 
     public void setController(BlockController bc) {
@@ -56,6 +75,7 @@ public class Block : MonoBehaviour{
      */
     void OnCollisionEnter2D(Collision2D other)
     {
+        collideSound(other.gameObject);
         //print("Colide: " + other.gameObject.name);
         if(controlable)
         {
@@ -126,5 +146,49 @@ public class Block : MonoBehaviour{
                 }
             }
         }
+    }
+
+    private void collideSound(GameObject other) {
+        if (silenceTimer > 0)
+            return;
+        audioSource.clip = contactSound;
+
+        float velocity = rb.velocity.magnitude;
+        float volume = (velocity / standardVelocitySound) - 0.5f;
+        if (volume < 0.1f)
+            volume = 0.1f;
+
+        audioSource.volume = volume;
+        audioSource.Play();
+
+        if (other != null)
+        {
+            Transform parent = other.transform.parent;
+            if (parent != null && parent.gameObject.tag.Equals("Block"))
+            {
+                Block blockScript = parent.GetComponent<Block>();
+                blockScript.playCollideSound(volume / 2);
+            }
+        }
+        silenceTimer = silenceTime;
+    }
+
+    public void playCollideSound(float volume) {
+        if (silenceTimer <= 0)
+        {
+            audioSource.clip = contactSound;
+
+            audioSource.volume = volume;
+            audioSource.Play();
+            silenceTimer = silenceTime;
+        }
+        
+    }
+
+    public void playDestructionSound() {
+        audioSource.clip = destroySound;
+
+        audioSource.volume = 1;
+        audioSource.Play();
     }
 }

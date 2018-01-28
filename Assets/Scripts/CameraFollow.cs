@@ -17,6 +17,15 @@ public class CameraFollow : MonoBehaviour {
     private Vector3 cameraSpeed;
     public Vector2 collisionCheckBox = new Vector2(8, 1);
 
+    //Follow variables
+    private Vector3 lastPosition;
+    private Transform targetToFollow;
+    private bool isFollowing = false;
+    public float smoothFollowConstant = 0.3f;
+    public float maxFollowSpeed = 20f;
+    public float timeToReturn = 0.5f;
+    private Vector3 followOffset;
+
     public void setPlayer(int player, int maxPlayers) {
         float ratio = 1f / maxPlayers;
         myCamera.rect = new Rect((player - 1) * ratio, 0, ratio, 1);
@@ -37,23 +46,32 @@ public class CameraFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        int count = Physics2D.OverlapBoxNonAlloc(myTransform.position + minOffset, collisionCheckBox, 0, buffer);
-        bool detected = false;
-        buffer[count] = null;
-        //Verifica se há blocos ou o chão no inferior da tela
-        if (count > 0)
+        if (!isFollowing)
         {
-            foreach (Collider2D col in buffer)
+
+            int count = Physics2D.OverlapBoxNonAlloc(myTransform.position + minOffset, collisionCheckBox, 0, buffer);
+            bool detected = false;
+            buffer[count] = null;
+            //Verifica se há blocos ou o chão no inferior da tela
+            if (count > 0)
             {
-                if (col == null)
-                    break;
-                if (col.gameObject.tag.Equals("Block"))
+                foreach (Collider2D col in buffer)
                 {
-                    Block blockScript = col.GetComponent<Block>();
-                    if (!blockScript.controlable)
-                    {
-                        detected = false;
+                    if (col == null)
                         break;
+                    if (col.gameObject.tag.Equals("Block"))
+                    {
+                        Block blockScript = col.GetComponent<Block>();
+                        if (!blockScript.controlable)
+                        {
+                            detected = false;
+                            break;
+                        }
+                        else
+                        {
+                            cameraSpeed = new Vector3(0, -verticalSpeed);
+                            detected = true;
+                        }
                     }
                     else
                     {
@@ -61,48 +79,76 @@ public class CameraFollow : MonoBehaviour {
                         detected = true;
                     }
                 }
-                else
-                {
-                    cameraSpeed = new Vector3(0, -verticalSpeed);
-                    detected = true;
-                }
             }
-        }
-        else {
-            cameraSpeed = new Vector3(0, -verticalSpeed);
-            detected = true;
-        }
-
-        count = Physics2D.OverlapBoxNonAlloc(myTransform.position + maxOffset, collisionCheckBox, 0, buffer);
-        buffer[count] = null;
-        if (count > 0)
-        {
-            foreach (Collider2D col in buffer)
+            else
             {
-                if (col == null)
-                    break;
-                if (col.gameObject.tag.Equals("Block"))
+                cameraSpeed = new Vector3(0, -verticalSpeed);
+                detected = true;
+            }
+
+            count = Physics2D.OverlapBoxNonAlloc(myTransform.position + maxOffset, collisionCheckBox, 0, buffer);
+            buffer[count] = null;
+            if (count > 0)
+            {
+                foreach (Collider2D col in buffer)
                 {
-                    Block blockScript = col.GetComponent<Block>();
-                    if (!blockScript.controlable)
-                    {
-                        cameraSpeed = new Vector3(0, verticalSpeed);
-                        detected = true;
+                    if (col == null)
                         break;
+                    if (col.gameObject.tag.Equals("Block"))
+                    {
+                        Block blockScript = col.GetComponent<Block>();
+                        if (!blockScript.controlable)
+                        {
+                            cameraSpeed = new Vector3(0, verticalSpeed);
+                            detected = true;
+                            break;
+                        }
                     }
                 }
             }
+
+            if (!detected)
+            {
+                cameraSpeed = Vector3.zero;
+            }
+
+            myTransform.position += cameraSpeed * Time.deltaTime;
+            if (myTransform.position.y < initialPosition.y)
+                myTransform.position = initialPosition;
         }
 
-        if (!detected)
-        {
-            cameraSpeed = Vector3.zero;
+        //Comportamento de seguir alvo
+        else {
+            myTransform.position = Vector3.SmoothDamp(myTransform.position, targetToFollow.position - followOffset,
+                ref cameraSpeed, smoothFollowConstant, maxFollowSpeed);
         }
 
-        myTransform.position += cameraSpeed * Time.deltaTime;
-        if (myTransform.position.y < initialPosition.y)
-            myTransform.position = initialPosition;
+    }
 
+    public void beginFollowTransform(Transform target) {
+        lastPosition = myTransform.position;
+        cameraSpeed = Vector3.zero;
+        isFollowing = true;
+        targetToFollow = target;
+        followOffset = new Vector3(0,0,(target.position - myTransform.position).z);
+    }
+
+    public void returnToFollowLine() {
+        //Chama função para retorna a camara para a posição
+        targetToFollow = new GameObject("Retorna").transform;
+        targetToFollow.position = lastPosition;
+        followOffset = Vector3.zero;
+        StartCoroutine(waitToCatchUp());
+    }
+
+    private IEnumerator waitToCatchUp() {
+        float delta = timeToReturn;
+        while (delta > 0) {
+            delta -= Time.deltaTime;
+            yield return null;
+        }
+
+        isFollowing = false;
     }
 
     /*

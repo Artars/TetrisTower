@@ -315,6 +315,9 @@ MonoBehaviour:
   maxPorcentage: 1.2
   verticalSpeed: 10
   collisionCheckBox: {x: 8, y: 1}
+  smoothFollowConstant: 0.3
+  maxFollowSpeed: 20
+  timeToReturn: 0.5
 --- !u!1 &1032561764
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +408,9 @@ MonoBehaviour:
   maxPorcentage: 1.2
   verticalSpeed: 10
   collisionCheckBox: {x: 8, y: 1}
+  smoothFollowConstant: 0.3
+  maxFollowSpeed: 20
+  timeToReturn: 0.5
 --- !u!1001 &1053878713
 Prefab:
   m_ObjectHideFlags: 0
@@ -520,76 +526,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1309896478
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4369913994576198, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -10.331
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369913994576198, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -3.878
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369913994576198, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369913994576198, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369913994576198, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369913994576198, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369913994576198, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369913994576198, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 212677745498523240, guid: 90cead560bb6ee847b3c26ee58deca03,
-        type: 2}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212677745498523240, guid: 90cead560bb6ee847b3c26ee58deca03,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 6d0d4c64d411c7945bb65151ea09a309,
-        type: 3}
-    - target: {fileID: 212677745498523240, guid: 90cead560bb6ee847b3c26ee58deca03,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369913994576198, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.77116
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369913994576198, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.77116
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369913994576198, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.77116
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 90cead560bb6ee847b3c26ee58deca03, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &1514474295
 Prefab:
   m_ObjectHideFlags: 0
@@ -660,6 +596,18 @@ Prefab:
       propertyPath: cameras.Array.data[1]
       value: 
       objectReference: {fileID: 836123564}
+    - target: {fileID: 114909737385121604, guid: 1aa3b5a5361a25546aff20928fee1dd8,
+        type: 2}
+      propertyPath: nuvem
+      value: 
+      objectReference: {fileID: 1926042987655424, guid: c1347e769cd5c974c979f8f481e16684,
+        type: 2}
+    - target: {fileID: 114909737385121604, guid: 1aa3b5a5361a25546aff20928fee1dd8,
+        type: 2}
+      propertyPath: popUpCameraPreafab
+      value: 
+      objectReference: {fileID: 1888945904101430, guid: feab6395f2f99ad45b10be29fbc0b648,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1aa3b5a5361a25546aff20928fee1dd8, type: 2}
   m_IsPrefabParent: 0

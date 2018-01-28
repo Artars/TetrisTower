@@ -13,7 +13,11 @@ public class GameManager : MonoBehaviour
     public CameraFollow[] cameras;
     public SpawnController spawnController;
     public GameObject nuvem;
-    
+
+    //DEBUG
+    public GameObject popUpCameraPreafab;
+    private Transform targetToFollow;
+
     private void Awake()
     {
         //Singleton constrution
@@ -61,5 +65,33 @@ public class GameManager : MonoBehaviour
         //Instancia as nuvens
         for (int x = 0; x < 10; x++)
             Instantiate(nuvem, new Vector3(Random.Range(-20, 100.0f), Random.Range(3, 15.0f), 0), nuvem.transform.rotation);
+    }
+
+    public int getMaxPlayers() {
+        return spawnPlace.Length;
+    }
+
+    private void Update()
+    {
+        if (popUpCameraPreafab != null)
+        {
+            if (Input.GetButtonDown("P1_Rotate"))
+            {
+                targetToFollow = new GameObject("Target").transform;
+                GameObject cam = GameObject.Instantiate(popUpCameraPreafab);
+                cam.GetComponent<CameraPopUp>().followTarget(targetToFollow, 1, getMaxPlayers());
+            }
+            else if (Input.GetButtonUp("P1_Rotate"))
+            {
+                Destroy(targetToFollow.gameObject);
+            }
+            if (Input.GetButton("P1_Rotate"))
+            {
+                Camera cam = cameras[0].GetComponent<Camera>();
+                Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+                mousePos.z = targetToFollow.position.z;
+                targetToFollow.position = mousePos;
+            }
+        }
     }
 }
